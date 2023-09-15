@@ -4,20 +4,21 @@ const appointmentService = require('../services/appointmentService');
 exports.createAppointment = async (req, res) => {
   try {
     const appointmentData = req.body;
-    const guestEmail = req.body.guestEmail; // Assuming guestEmail is provided in the request body
+    const guestEmail = req.params.email; 
     const appointment = await appointmentService.createAppointment(appointmentData, guestEmail);
     res.json(appointment);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };
 
 // Controller function for viewing all appointments
 exports.viewAppointments = async (req, res) => {
   try {
-    const appointments = await appointmentService.viewAppointments();
+    const email = req.params.email
+    const appointments = await appointmentService.viewAppointments(email);
     res.json(appointments);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };

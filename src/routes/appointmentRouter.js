@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
+const authenticationMiddleware = require("../middleware/authentication");
+const validateRequest = require("../validator/validator");
+const appointmentSchema = require("../schemas/appointmentSchema");
 router.use(authenticationMiddleware);
 
 // Create a new appointment
-router.post('/create', appointmentController.createAppointment);
+router.post('/create/:email',   validateRequest(appointmentSchema.createAppointment, "body"),
+appointmentController.createAppointment);
 
-// View all appointments
-router.get('/get', appointmentController.viewAppointments);
+// view aprticular appointment
+router.get('/get/:email', appointmentController.viewAppointments);
 
 module.exports = router;

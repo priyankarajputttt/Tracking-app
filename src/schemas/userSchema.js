@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-// Define user schemas
+//user schemas
 const userSchemas = {
   userSignup: Joi.object({
     username: Joi.string().required(),

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the Appointment schema
 const appointmentSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -25,7 +24,6 @@ const appointmentSchema = new mongoose.Schema({
   },
 });
 
-// Create the Appointment model
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
 module.exports = Appointment;

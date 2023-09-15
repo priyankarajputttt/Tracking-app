@@ -22,8 +22,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
-
-// Mount the routers
 app.use('/api/users', userRoutes);
 app.use('/api/appointments', appointmentRoutes);
 

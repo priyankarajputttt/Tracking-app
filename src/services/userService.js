@@ -28,8 +28,6 @@ exports.signupUser = async (userData) => {
   }
 };
 
-// Service function for user login and JWT token generation
-
 exports.loginUser = async (email, password) => {
     const user = await User.findOne({ email });
   
@@ -43,7 +41,7 @@ exports.loginUser = async (email, password) => {
       throw new Error("Incorrect password.");
     }
   
-    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "24h" });
     return token;
   };
 
@@ -84,8 +82,7 @@ exports.markOffHours = async (email, offHours) => {
 // Get user's upcoming appointments
 exports.getUpcomingAppointments = async (email) => {
   try {
-    const user = await User.findOne({ email }).populate('appointments');
-    console.log(user)
+    const user = await User.findOne({ email }).populate('appointments')
     if (!user) {
       throw new Error('User not found');
     }

@@ -7,7 +7,7 @@ exports.signupUser = async (req, res) => {
     const newUser = await userService.signupUser(userData);
     res.json(newUser);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };
 
@@ -36,7 +36,7 @@ exports.updateUserProfile = async (req, res) => {
     res.json(updatedUser);
   } catch (error) {
     console.log(error)
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };
 
@@ -48,7 +48,7 @@ exports.markOffHours = async (req, res) => {
     const updatedUser = await userService.markOffHours(email, offHours);
     res.json(updatedUser);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };
 
@@ -59,6 +59,6 @@ exports.getUpcomingAppointments = async (req, res) => {
     const upcomingAppointments = await userService.getUpcomingAppointments(email);
     res.json(upcomingAppointments);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ success: false, message: `Internal server error : ${error}` });
   }
 };
